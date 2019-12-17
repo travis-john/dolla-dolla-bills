@@ -1,0 +1,9 @@
+cryptocompare: 04cba1c6d138450a061c3b153a670503a29f5ea26e47756654c8e18a11b9306e
+
+alphavantage: TTJMFECFAT8Y4P9E
+
+New York Times: 62b2d1b8-ffbf-4579-9b72-401d43f13339
+
+Plaid[API Key]: 553b633a9e4bddc6c0c53d7184923c
+
+Plaid[Client ID]: 5df9675965d694001423398b
