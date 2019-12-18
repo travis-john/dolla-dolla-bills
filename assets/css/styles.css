@@ -1,0 +1,32 @@
+.gradient {
+  background: linear-gradient( 109.6deg,  rgba(31,179,237,1) 11.2%, rgba(17,106,197,1) 91.1% );
+}
+
+.full-width {
+  width: 100%;
+}
+
+.margin-auto {
+  margin: 0 auto;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-justify-center {
+  justify-content: center;
+}
+
+.d-align-center {
+  align-items: center;
+}
+
+.v-100 {
+  height: 100vh;
+}
+
+
+.w-100 {
+  width: 100vw;
+}

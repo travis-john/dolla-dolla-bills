@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset='UTF-8'>
     <title>Dolla Dolla Bills</title>
-    <meta name="description" content="DESCRIPTION">
+    <meta name='description' content='DESCRIPTION'>
     <!--
 
     Adding Yoda because it's cool
     __.-._
-    '-._"7'
+    '-._'7'
      /'.-c
      |  /T
     _)_/LI
@@ -17,27 +17,92 @@
   -->
 
     <!--[if lt IE 9]>
-      <script src = "http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src = 'http://html5shiv.googlecode.com/svn/trunk/html5.js'></script>
     <![endif]-->
 
     <!-- Materialize CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
+
+    <!-- Materialize Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Importing Roboto and Roboto Slab from Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap' rel='stylesheet'>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel='stylesheet' href='assets/css/styles.css'>
 
 </head>
 
-<body>
+<body class='gradient d-flex v-100 d-justify-center d-align-center'>
+
+  <div class='container'>
+
+    <div class='row'>
+
+      <div class='col s6 offset-s3'>
+
+        <div class='card'>
+
+          <div class="card-title center-align">
+
+            <span>Dolla Dolla Bills Y'All</span>
+
+          </div>
+
+          <div class="card-content">
+
+            <p>Log in to your dashboard to see yo shit</p>
+
+            <div class="row">
+
+              <div class="input-field col s6">
+
+                <input type="text" id='username'>
+
+                <label for="username">Username</label>
+
+              </div>
+
+              <div class="input-field col s6">
+
+                <input type="text" id='password'>
+
+                <label for="password">Password</label>
+
+              </div>
+
+              <button class='btn waves-effect waves-light full-width align-center' type="submit" name="submit-button">Submit</button>
+
+            </div>
+
+            <div class="row">
+
+              <div class="col s12 center-align">
+
+                <a href="#">Log in as a guest</a>
+
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
 
   <!-- JQuery -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src='https://code.jquery.com/jquery-3.4.1.min.js' integrity='sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=' crossorigin='anonymous'></script>
 
   <!-- Materialize JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>
 
   <!-- Custom JS -->
   <script src='assets/js/index.js'>
