@@ -29,6 +29,9 @@
     <!-- Importing Roboto and Roboto Slab from Google Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap' rel='stylesheet'>
 
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
     <!-- Custom CSS -->
     <link rel='stylesheet' href='assets/css/index.css'>
 
@@ -39,8 +42,11 @@
   <div class='container'>
 
     <div class='row'>
+      
+     <div id="firebaseui-auth-container"></div>
+     <div id="loader">Loading...</div>
 
-      <div class='col s6 offset-s3'>
+      <!-- <div class='col s6 offset-s3'>
 
         <div class='card'>
 
@@ -92,7 +98,7 @@
 
         </div>
 
-      </div>
+      </div> -->
 
     </div>
 
@@ -103,6 +109,27 @@
 
   <!-- Materialize JS -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+     <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-auth.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyB_Npz0q0b_LJmK7AiW821UFkEUS-BPjck",
+    authDomain: "cream-get-the-money.firebaseapp.com",
+    databaseURL: "https://cream-get-the-money.firebaseio.com",
+    projectId: "cream-get-the-money",
+    storageBucket: "cream-get-the-money.appspot.com",
+    messagingSenderId: "265093588062",
+    appId: "1:265093588062:web:6ca3b31836a5ddfd7d80cf"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
 
   <!-- Custom JS -->
   <script src='assets/js/index.js'>
