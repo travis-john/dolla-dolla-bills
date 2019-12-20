@@ -22,6 +22,10 @@ h6 {
     padding-left: 250px;
   }
 }
+
+.d-none {
+  display: none;
+}
 /* nav */
 nav {
   background-color: #202124;
@@ -95,9 +99,6 @@ nav, nav .nav-wrapper i, .navbar-fixed {
 .card .card-action {
   border-top: none;
 }
-.card .card-action a {
-  color: #fff !important;
-}
 .card .card-text {
   width: calc(100% - 60px);
 }
@@ -105,6 +106,10 @@ nav, nav .nav-wrapper i, .navbar-fixed {
   width: 100%;
   text-align: center;
   color: rgba(0, 0, 0, 0.25);
+}
+
+.mb-1 {
+  margin-bottom: 1rem;
 }
 table {
   font-size: 13px;
