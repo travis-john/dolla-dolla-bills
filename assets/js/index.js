@@ -1,5 +1,19 @@
+var firebaseConfig = {
+  apiKey: "AIzaSyB_Npz0q0b_LJmK7AiW821UFkEUS-BPjck",
+  authDomain: "cream-get-the-money.firebaseapp.com",
+  databaseURL: "https://cream-get-the-money.firebaseio.com",
+  projectId: "cream-get-the-money",
+  storageBucket: "cream-get-the-money.appspot.com",
+  messagingSenderId: "265093588062",
+  appId: "1:265093588062:web:6ca3b31836a5ddfd7d80cf"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
 // Initialize the FirebaseUI Widget using Firebase.
+const database = firebase.database();
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
   ui.start('#firebaseui-auth-container', {
     signInOptions: [
       firebase.auth.EmailAuthProvider.PROVIDER_ID
@@ -33,3 +47,17 @@ var ui = new firebaseui.auth.AuthUI(firebase.auth());
     privacyPolicyUrl: '<your-privacy-policy-url>'
   };
   ui.start('#firebaseui-auth-container', uiConfig);
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      var userId = firebase.auth().currentUser.uid;
+
+      firebase.database().ref('users/' + userId).set({
+        favorites: 0
+      });
+    } else {
+      // No user is signed in.
+    }
+  });
+
+
