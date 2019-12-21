@@ -53,7 +53,7 @@ var ui = new firebaseui.auth.AuthUI(firebase.auth());
       var userId = firebase.auth().currentUser.uid;
 
       firebase.database().ref('users/' + userId).set({
-        favorites: 0
+        favorites: ["init"]
       });
     } else {
       // No user is signed in.
