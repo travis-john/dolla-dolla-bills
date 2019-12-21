@@ -1,3 +1,4 @@
+///// FIREBASE CODE START /////
 var firebaseConfig = {
   apiKey: "AIzaSyB_Npz0q0b_LJmK7AiW821UFkEUS-BPjck",
   authDomain: "cream-get-the-money.firebaseapp.com",
