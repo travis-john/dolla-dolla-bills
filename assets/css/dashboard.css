@@ -126,3 +126,12 @@ table.bordered > thead, table.bordered > tbody > tr {
 table tr:last-child {
   border-bottom: none;
 }
+
+.crypto-news-link {
+  color: black;
+  font-size: 1rem;
+}
+
+.crypto-news-link:hover {
+  text-decoration: underline;
+}
