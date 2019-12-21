@@ -138,3 +138,15 @@ favoriteTrigger.click(function(){
   $('.stocks-news-row').addClass('d-none');
   $('.favorites-row').removeClass('d-none');
 });
+
+$('.add-favorite').click(function(){
+
+  //// add favorite function here /////
+
+});
+
+$('.remove-favorite').click(function(){
+
+  ///// remove favorite function here /////
+
+})
