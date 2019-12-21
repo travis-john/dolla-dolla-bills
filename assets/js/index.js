@@ -48,7 +48,7 @@ var ui = new firebaseui.auth.AuthUI(firebase.auth());
   };
   ui.start('#firebaseui-auth-container', uiConfig);
 
-  firebase.auth().onAuthStateChanged(function(user) {
+ firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       var userId = firebase.auth().currentUser.uid;
 
@@ -60,4 +60,80 @@ var ui = new firebaseui.auth.AuthUI(firebase.auth());
     }
   });
 
+  /////  NYT API CODE START /////
+  var cryptoTrigger = $('.crypto-trigger'),
+      stocksTrigger = $('.stocks-trigger'),
+      favoriteTrigger = $('.favorites-trigger'),
+      NYTAPIKEY = 'jnU2uozAn1FRTD9raWPlcQsox5hokuSC',
+      cryptoQueryURL = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=cryptocurrency&fq=newest&api-key=' + NYTAPIKEY;
+      stocksQueryURl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=stocks&fq=newest&api-key=' + NYTAPIKEY;
 
+function renderCryptoNews(){
+  $.ajax({
+    url: cryptoQueryURL,
+    method: 'GET'
+  }).then(function(cryptoResponse){
+    console.log(cryptoResponse);
+
+    for (var i = 0; i < cryptoResponse.response.docs.length; i++){
+      $('.crypto-news-tbody').append(
+        `<tr>
+            <td><a class='crypto-news-link' href='${cryptoResponse.response.docs[i].web_url}'>${cryptoResponse.response.docs[i].headline.main}</a></td>
+         </tr>`
+      );
+    }
+  });
+}
+
+function renderStocksNews(){
+  $.ajax({
+    url: stocksQueryURl,
+    method: 'GET'
+  }).then(function(stocksResponse){
+    console.log(stocksResponse);
+
+    for (var i = 0; i < stocksResponse.response.docs.length; i++){
+      $('.stocks-news-body').append(
+        `<tr>
+            <td><a class='stocks-news-link' href='${stocksResponse.response.docs[i].web_url}'>${stocksResponse.response.docs[i].headline.main}</a></td>
+         </tr>`
+      );
+    }
+  });
+}
+
+
+cryptoTrigger.click(function(){
+  $('.favorites').removeClass('active');
+  $('.stocks').removeClass('active');
+  $('.crypto').addClass('active');
+  $('.stocks-news-row').addClass('d-none');
+  $('.stocks-charts-row').addClass('d-none');
+  $('.crypto-charts-row').removeClass('d-none');
+  $('.crypto-news-row').removeClass('d-none');
+  $('.favorites-row').addClass('d-none');
+  renderCryptoNews();
+});
+
+stocksTrigger.click(function(){
+  $('.favorites').removeClass('active');
+  $('.crypto').removeClass('active');
+  $('.stocks').addClass('active');
+  $('.crypto-charts-row').addClass('d-none');
+  $('.crypto-news-row').addClass('d-none');
+  $('.stocks-charts-row').removeClass('d-none');
+  $('.stocks-news-row').removeClass('d-none');
+  $('.favorites-row').addClass('d-none');
+  renderStocksNews();
+});
+
+favoriteTrigger.click(function(){
+  $('.favorites').addClass('active');
+  $('.stocks').removeClass('active');
+  $('.crypto').removeClass('active');
+  $('.crypto-charts-row').addClass('d-none');
+  $('.crypto-news-row').addClass('d-none');
+  $('.stocks-charts-row').addClass('d-none');
+  $('.stocks-news-row').addClass('d-none');
+  $('.favorites-row').removeClass('d-none');
+});

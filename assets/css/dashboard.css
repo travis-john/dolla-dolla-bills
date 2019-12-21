@@ -7,6 +7,11 @@ h6 {
   font-size: 1.5rem;
   margin-top: 0;
 }
+
+a {
+  cursor: pointer;
+}
+
 .card, .card-panel {
   box-shadow: 0 1px 1px 0 rgba(60, 64, 67, 0.08), 0 1px 3px 1px rgba(60, 64, 67, 0.16);
 }
@@ -125,4 +130,13 @@ table.bordered > thead, table.bordered > tbody > tr {
 }
 table tr:last-child {
   border-bottom: none;
+}
+
+.crypto-news-link, .stocks-news-link {
+  color: black;
+  font-size: 1.25rem;
+}
+
+.crypto-news-link:hover, .stocks-news-link:hover {
+  text-decoration: underline;
 }

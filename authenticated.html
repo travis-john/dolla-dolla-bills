@@ -26,6 +26,12 @@
     <!-- Materialize Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    <!-- Firebase JS -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+
+    <!-- Firebase CSS -->
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
     <!-- Importing Roboto and Roboto Slab from Google Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap' rel='stylesheet'>
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
@@ -50,9 +56,9 @@
 </div>
 
 <ul class="side-nav fixed transparent z-depth-0">
-    <li class="active"><a href="#"><i class="material-icons">favorite</i>Dashboard</a></li>
-    <li><a href="#"><i class="material-icons">attach_money</i>Cryptocurrencies</a></li>
-    <li><a href="#"><i class="material-icons">pie_chart</i>Stocks</a></li>
+    <li class="favorites active"><a class="favorites-trigger" href="#"><i class="material-icons">favorite</i>Dashboard</a></li>
+    <li class="crypto"><a class='crypto-trigger'><i class="material-icons">attach_money</i>Cryptocurrencies</a></li>
+    <li class="stocks"><a class='stocks-trigger'><i class="material-icons">pie_chart</i>Stocks</a></li>
     <li>
         <div class="divider"></div>
     </li>
@@ -61,7 +67,7 @@
     <div class="container-fluid">
 
       <!-- favorites content -->
-        <div class="row">
+        <div class="row favorites-row">
           <h2>Favorites</h2>
             <div class="col s12 m6 mb-1">
                 <div class="card">
@@ -167,11 +173,11 @@
                     <table class="bordered highlight">
                         <thead>
                             <tr>
-                                <th colspan="2">TODO List</th>
+                                <th colspan="2"><h2>Lastest Crypto News</h2></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
+                        <tbody class="crypto-news-tbody">
+                            <!-- <tr>
                                 <td>Upgrade to SSD harddisks</td>
                             </tr>
                             <tr>
@@ -182,7 +188,7 @@
                             </tr>
                             <tr>
                                 <td>Pay server invoice</td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -247,11 +253,11 @@
                     <table class="bordered highlight">
                         <thead>
                             <tr>
-                                <th colspan="2">TODO List</th>
+                                <th colspan="2"><h2>Latest Stocks News</h2></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
+                        <tbody class="stocks-news-body">
+                            <!-- <tr>
                                 <td>Upgrade to SSD harddisks</td>
                             </tr>
                             <tr>
@@ -262,7 +268,7 @@
                             </tr>
                             <tr>
                                 <td>Pay server invoice</td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -285,9 +291,7 @@
 <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-auth.js"></script>
 
   <!-- Custom JS -->
-  <script src='assets/js/index.js'>
-
-  </script>
+  <script src='assets/js/index.js'></script>
 </body>
 
 </html>
