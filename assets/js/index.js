@@ -150,3 +150,7 @@ $('.remove-favorite').click(function(){
   ///// remove favorite function here /////
 
 })
+
+///// SEARCH FUNCTIONALITY HERE /////
+var stockID = $('#stock-search').val().trim(),
+    cryptoID = $('#crpyto-search').val().trim();
