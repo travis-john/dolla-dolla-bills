@@ -122,9 +122,9 @@ function renderCryptoRates (){
       url: priceCryptoQueryURL,
       method: 'GET'
     }).then(function(priceCryptoResponse){
-      console.log(priceCryptoResponse);
+      console.log(priceCryptoResponse.DISPLAY);
 
-      for (var i = 0; i < basicCryptoResponse.Data.length; i ++){
+      for (var i = 0; i < basicCryptoResponse.Data.length; i++){
         var cardsRow = $('.crypto-cards-row');
         cardsRow.append(`
           <div class="col s12 m6 mb-1">
@@ -133,7 +133,7 @@ function renderCryptoRates (){
                 <div class="card-text">
                   <span class="card-title">${basicCryptoResponse.Data[i].CoinInfo.FullName}</span>
                   <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
-                    <span><b>Price:</b>${priceCryptoResponse.DISPLAY[i].USD.PRICE}</span>
+                      <span><b>Price:</b>${priceCryptoResponse.DISPLAY[i].USD.PRICE}</span>
                   <i>Chart Here</i>
                 </div>
               </div>
