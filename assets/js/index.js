@@ -105,7 +105,7 @@ function renderStocksNews() {
 
 ///// NYT CODE END /////
 
-///// CRYPTOCOMPARE CODE START /////
+///// COINLIB CODE START /////
 
 var cryptoAPIKey = '04cba1c6d138450a061c3b153a670503a29f5ea26e47756654c8e18a11b9306e',
   coinlibAPIKey = 'cc91d6b22f005e77',
