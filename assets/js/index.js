@@ -108,10 +108,8 @@ function renderStocksNews(){
 ///// CRYPTOCOMPARE CODE START /////
 
 var cryptoAPIKey ='04cba1c6d138450a061c3b153a670503a29f5ea26e47756654c8e18a11b9306e',
-    basicCryptoQueryURL = 'https://min-api.cryptocompare.com/data/coin/generalinfo?fsyms=BTC,ETH,XMR,MLN,DASH,GBP&tsym=USD',
-    priceCryptoQueryURL = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XMR,MLN,DASH&tsyms=USD'
-
-
+    basicCryptoQueryURL = 'https://min-api.cryptocompare.com/data/coin/generalinfo?fsyms=BTC,ETH,XMR,MLN,DASH,GBP&tsym=USD&api_key=' + cryptoAPIKey,
+    priceCryptoQueryURL = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XMR,MLN,DASH&tsyms=USD&api_key=' + cryptoAPIKey;
 
 function renderCryptoRates (){
   $.ajax({
@@ -128,6 +126,7 @@ function renderCryptoRates (){
 
       for (var i = 0; i < basicCryptoResponse.Data.length; i ++){
         var cardsRow = $('.crypto-cards-row');
+        console.log(obj);
         cardsRow.append(`
           <div class="col s12 m6 mb-1">
             <div class="card">
@@ -135,7 +134,7 @@ function renderCryptoRates (){
                 <div class="card-text">
                   <span class="card-title">${basicCryptoResponse.Data[i].CoinInfo.FullName}</span>
                   <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
-                  <span><b>${priceCryptoResponse.}
+                  <span><b>Price:</b>${priceCryptoResponse.DISPLAY[i].USD.PRICE}</span>
                   <i>Chart Here</i>
                 </div>
               </div>
@@ -150,6 +149,8 @@ function renderCryptoRates (){
 
   });
 }
+
+
 
 
 
