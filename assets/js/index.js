@@ -107,46 +107,71 @@ function renderStocksNews(){
 
 ///// CRYPTOCOMPARE CODE START /////
 
-var cryptoAPIKey ='04cba1c6d138450a061c3b153a670503a29f5ea26e47756654c8e18a11b9306e',
-    basicCryptoQueryURL = 'https://min-api.cryptocompare.com/data/coin/generalinfo?fsyms=BTC,ETH,XMR,MLN,DASH,GBP&tsym=USD&api_key=' + cryptoAPIKey,
-    priceCryptoQueryURL = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XMR,MLN,DASH&tsyms=USD&api_key=' + cryptoAPIKey;
+var coinlibAPIKey = 'cc91d6b22f005e77',
+    coinlibQueryURL = 'https://coinlib.io/api/v1/coin?key=' + coinlibAPIKey + '&pref=USD&symbol=BTC,ETH,XMR,MLN,DASH';
 
 function renderCryptoRates (){
+
   $.ajax({
-    url: basicCryptoQueryURL,
+    url: coinlibQueryURL,
     method: 'GET'
-  }).then(function(basicCryptoResponse){
-    console.log(basicCryptoResponse);
+  }).then(function(cryptoResponse){
+    console.log(cryptoResponse);
 
-    $.ajax({
-      url: priceCryptoQueryURL,
-      method: 'GET'
-    }).then(function(priceCryptoResponse){
-      console.log(priceCryptoResponse.DISPLAY);
-
-      for (var i = 0; i < basicCryptoResponse.Data.length; i++){
-        var cardsRow = $('.crypto-cards-row');
-        cardsRow.append(`
-          <div class="col s12 m6 mb-1">
-            <div class="card">
-              <div class="card-content valign-wrapper">
-                <div class="card-text">
-                  <span class="card-title">${basicCryptoResponse.Data[i].CoinInfo.FullName}</span>
-                  <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
-                      <span><b>Price:</b>${priceCryptoResponse.DISPLAY[i].USD.PRICE}</span>
-                  <i>Chart Here</i>
+    for (var i = 0; i < cryptoResponse.coins.length; i++){
+            var cardsRow = $('.crypto-cards-row');
+            cardsRow.append(`
+              <div class="col s12 m6 mb-1">
+                <div class="card">
+                  <div class="card-content valign-wrapper">
+                    <div class="card-text">
+                      <span class="card-title">${cryptoResponse.coins[i].name}</span>
+                      <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
+                          <span><b>Price: </b>$${cryptoResponse.coins[i].price.toFixed(2)}</span>
+                      <i>Chart Here</i>
+                    </div>
+                  </div>
+                  <div class="card-action"><a href="#">View report</a></div>
                 </div>
-              </div>
-              <div class="card-action"><a href="#">View report</a></div>
-            </div>
-          </div>`);
-      }
-
-    });
-
-
+              </div>`);
+    }
 
   });
+  // $.ajax({
+  //   url: basicCryptoQueryURL,
+  //   method: 'GET'
+  // }).then(function(basicCryptoResponse){
+  //   console.log(basicCryptoResponse);
+  //
+  //   $.ajax({
+  //     url: priceCryptoQueryURL,
+  //     method: 'GET'
+  //   }).then(function(priceCryptoResponse){
+  //     console.log(priceCryptoResponse.DISPLAY);
+  //
+  //     for (var i = 0; i < basicCryptoResponse.Data.length; i++){
+  //       var cardsRow = $('.crypto-cards-row');
+  //       cardsRow.append(`
+  //         <div class="col s12 m6 mb-1">
+  //           <div class="card">
+  //             <div class="card-content valign-wrapper">
+  //               <div class="card-text">
+  //                 <span class="card-title">${basicCryptoResponse.Data[i].CoinInfo.FullName}</span>
+  //                 <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
+  //                     <span><b>Price:</b>${priceCryptoResponse.DISPLAY[i].USD.PRICE}</span>
+  //                 <i>Chart Here</i>
+  //               </div>
+  //             </div>
+  //             <div class="card-action"><a href="#">View report</a></div>
+  //           </div>
+  //         </div>`);
+  //     }
+  //
+  //   });
+  //
+  //
+  //
+  // });
 }
 
 
