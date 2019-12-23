@@ -107,8 +107,11 @@ function renderStocksNews(){
 
 ///// CRYPTOCOMPARE CODE START /////
 
-var coinlibAPIKey = 'cc91d6b22f005e77',
-    coinlibQueryURL = 'https://coinlib.io/api/v1/coin?key=' + coinlibAPIKey + '&pref=USD&symbol=BTC,ETH,XMR,MLN,DASH';
+var cryptoAPIKey ='04cba1c6d138450a061c3b153a670503a29f5ea26e47756654c8e18a11b9306e',
+    coinlibAPIKey = 'cc91d6b22f005e77',
+    coinlibQueryURL = 'https://coinlib.io/api/v1/coin?key=' + coinlibAPIKey + '&pref=USD&symbol=BTC,ETH,XMR,MLN,DASH',
+    basicCryptoQueryURL = 'https://min-api.cryptocompare.com/data/coin/generalinfo?fsyms=BTC,ETH,XMR,MLN,DASH,GBP&tsym=USD&api_key=' + cryptoAPIKey,
+    priceCryptoQueryURL = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XMR,MLN,DASH&tsyms=USD&api_key=' + cryptoAPIKey;
 
 function renderCryptoRates (){
 
@@ -127,7 +130,14 @@ function renderCryptoRates (){
                     <div class="card-text">
                       <span class="card-title">${cryptoResponse.coins[i].name}</span>
                       <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
-                          <span><b>Price: </b>$${cryptoResponse.coins[i].price.toFixed(2)}</span>
+                      <div class='row'>
+                        <div class='col s6'>
+                          <ul><li><b>Price: </b>$${cryptoResponse.coins[i].price}</li><li><b>Day High: </b>${cryptoResponse.coins[i].high_24h}<li><li><b>Day Low: </b>${cryptoResponse.coins[i].low_24h}</li></ul>
+                          </div>
+                          <div class='col s6'>
+                          <ul><li><b>Hourly Change: </b>$${cryptoResponse.coins[i].delta_1h}</li><li><b>Daily Change: </b>${cryptoResponse.coins[i].delta_24h}<li><li><b>Weekly Change: </b>${cryptoResponse.coins[i].delta_7d}</li></ul>
+                          </div>
+                          </div>
                       <i>Chart Here</i>
                     </div>
                   </div>
