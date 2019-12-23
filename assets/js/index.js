@@ -103,7 +103,56 @@ function renderStocksNews(){
   });
 }
 
+///// NYT CODE END /////
 
+///// CRYPTOCOMPARE CODE START /////
+
+var cryptoAPIKey ='04cba1c6d138450a061c3b153a670503a29f5ea26e47756654c8e18a11b9306e',
+    basicCryptoQueryURL = 'https://min-api.cryptocompare.com/data/coin/generalinfo?fsyms=BTC,ETH,XMR,MLN,DASH,GBP&tsym=USD',
+    priceCryptoQueryURL = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,EOS,BCH,XRP&tsyms=USD'
+
+
+
+function renderCryptoRates (){
+  $.ajax({
+    url: basicCryptoQueryURL,
+    method: 'GET'
+  }).then(function(basicCryptoResponse){
+    console.log(basicCryptoResponse);
+
+    $.ajax({
+      url: priceCryptoQueryURL,
+      method: 'GET'
+    }).then(function(priceCryptoResponse){
+      console.log(priceCryptoResponse);
+
+      for (var i = 0; i < basicCryptoResponse.Data.length; i ++){
+        var cardsRow = $('.crypto-cards-row');
+        cardsRow.append(`
+          <div class="col s12 m6 mb-1">
+            <div class="card">
+              <div class="card-content valign-wrapper">
+                <div class="card-text">
+                  <span class="card-title">${basicCryptoResponse.Data[i].CoinInfo.FullName}</span>
+                  <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
+                  <i>Chart Here</i>
+                </div>
+              </div>
+              <div class="card-action"><a href="#">View report</a></div>
+            </div>
+          </div>`);
+      }
+
+    });
+
+
+
+  });
+}
+
+
+
+///// SWITCHING BETWEEN TABS IN DASHBOARD /////
 cryptoTrigger.click(function(){
   $('.favorites').removeClass('active');
   $('.stocks').removeClass('active');
@@ -114,6 +163,7 @@ cryptoTrigger.click(function(){
   $('.crypto-news-row').removeClass('d-none');
   $('.favorites-row').addClass('d-none');
   renderCryptoNews();
+  renderCryptoRates();
 });
 
 stocksTrigger.click(function(){
@@ -148,21 +198,5 @@ $('.add-favorite').click(function(){
 $('.remove-favorite').click(function(){
 
   ///// remove favorite function here /////
-
-})
-
-///// SEARCH FUNCTIONALITY HERE /////
-var stockID = $('#stock-search').val().trim(),
-    cryptoID = $('#crpyto-search').val().trim();
-
-$('#stocks-submit').click(function(){
-
-  ///// SEARCH FOR STOCKS FUNCTIONALITY HERE /////
-
-});
-
-$('#crypto-submit').click(function(){
-
-  ///// SEARCH FOR CRYPTOCURRENTCY FUNCTIONALITY HERE /////
 
 })
