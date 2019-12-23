@@ -109,7 +109,7 @@ function renderStocksNews(){
 
 var cryptoAPIKey ='04cba1c6d138450a061c3b153a670503a29f5ea26e47756654c8e18a11b9306e',
     basicCryptoQueryURL = 'https://min-api.cryptocompare.com/data/coin/generalinfo?fsyms=BTC,ETH,XMR,MLN,DASH,GBP&tsym=USD',
-    priceCryptoQueryURL = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,EOS,BCH,XRP&tsyms=USD'
+    priceCryptoQueryURL = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XMR,MLN,DASH&tsyms=USD'
 
 
 
@@ -135,6 +135,7 @@ function renderCryptoRates (){
                 <div class="card-text">
                   <span class="card-title">${basicCryptoResponse.Data[i].CoinInfo.FullName}</span>
                   <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
+                  <span><b>${priceCryptoResponse.}
                   <i>Chart Here</i>
                 </div>
               </div>
