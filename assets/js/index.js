@@ -126,7 +126,6 @@ function renderCryptoRates (){
 
       for (var i = 0; i < basicCryptoResponse.Data.length; i ++){
         var cardsRow = $('.crypto-cards-row');
-        console.log(obj);
         cardsRow.append(`
           <div class="col s12 m6 mb-1">
             <div class="card">
