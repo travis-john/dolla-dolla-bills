@@ -207,7 +207,7 @@ $('#crypto-submit').click(function(){
                   <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
                   <div class='row'>
                     <div class='col s6'>
-                      <ul><li><b>Price: </b>$${cryptoSearchResponse.price}</li><li><b>Day High: </b>${ccryptoSearchResponse.high_24h}<li><li><b>Day Low: </b>${cryptoSearchResponse.low_24h}</li></ul>
+                      <ul><li><b>Price: </b>$${cryptoSearchResponse.price}</li><li><b>Day High: </b>${cryptoSearchResponse.high_24h}<li><li><b>Day Low: </b>${cryptoSearchResponse.low_24h}</li></ul>
                     </div>
                     <div class='col s6'>
                       <ul><li><b>Hourly Change: </b>$${cryptoSearchResponse.delta_1h}</li><li><b>Daily Change: </b>${cryptoSearchResponse.delta_24h}<li><li><b>Weekly Change: </b>${cryptoSearchResponse.delta_7d}</li></ul>
