@@ -108,10 +108,10 @@ function renderStocksNews() {
 ///// COINLIB CODE START /////
 
 var cryptoAPIKey = '04cba1c6d138450a061c3b153a670503a29f5ea26e47756654c8e18a11b9306e',
-  coinlibAPIKey = 'cc91d6b22f005e77',
-  coinlibQueryURL = 'https://coinlib.io/api/v1/coin?key=' + coinlibAPIKey + '&pref=USD&symbol=BTC,ETH,XMR,MLN,DASH',
-  basicCryptoQueryURL = 'https://min-api.cryptocompare.com/data/coin/generalinfo?fsyms=BTC,ETH,XMR,MLN,DASH,GBP&tsym=USD&api_key=' + cryptoAPIKey,
-  priceCryptoQueryURL = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XMR,MLN,DASH&tsyms=USD&api_key=' + cryptoAPIKey;
+    coinlibAPIKey = 'cc91d6b22f005e77',
+    coinlibQueryURL = 'https://coinlib.io/api/v1/coin?key=' + coinlibAPIKey + '&pref=USD&symbol=BTC,ETH,XMR,MLN,DASH',
+    basicCryptoQueryURL = 'https://min-api.cryptocompare.com/data/coin/generalinfo?fsyms=BTC,ETH,XMR,MLN,DASH,GBP&tsym=USD&api_key=' + cryptoAPIKey,
+    priceCryptoQueryURL = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XMR,MLN,DASH&tsyms=USD&api_key=' + cryptoAPIKey;
 
 function renderCryptoRates() {
 
@@ -183,6 +183,44 @@ function renderCryptoRates() {
   //
   // });
 }
+
+///// CRYPTO SEARCH FUNCTION /////
+
+$('#crypto-submit').click(function(){
+  var coin = $('#crypto-search').val().trim(),
+      cryptoSearchAPIKEY = 'cc91d6b22f005e77',
+      cryptoSearchURL = 'https://coinlib.io/api/v1/coin?key=' + cryptoSearchAPIKEY + '&pref=USD&symbol=' + coin;
+
+      $.ajax({
+        url: cryptoSearchURL,
+        method: 'GET'
+      }).then(function(cryptoSearchResponse){
+        console.log(cryptoSearchResponse);
+        var cardsRow = $('.crypto-cards-row');
+
+        cardsRow.prepend(`
+          <div class="col s12 m6 mb-1">
+            <div class="card">
+              <div class="card-content valign-wrapper">
+                <div class="card-text">
+                  <span class="card-title">${cryptoSearchResponse.name}</span>
+                  <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
+                  <div class='row'>
+                    <div class='col s6'>
+                      <ul><li><b>Price: </b>$${cryptoSearchResponse.price}</li><li><b>Day High: </b>${ccryptoSearchResponse.high_24h}<li><li><b>Day Low: </b>${cryptoSearchResponse.low_24h}</li></ul>
+                    </div>
+                    <div class='col s6'>
+                      <ul><li><b>Hourly Change: </b>$${cryptoSearchResponse.delta_1h}</li><li><b>Daily Change: </b>${cryptoSearchResponse.delta_24h}<li><li><b>Weekly Change: </b>${cryptoSearchResponse.delta_7d}</li></ul>
+                    </div>
+                  </div>
+                  <i>Chart Here</i>
+                </div>
+              </div>
+              <div class="card-action"><a href="#">View report</a></div>
+            </div>
+          </div>`);
+      });
+});
 
 
 
