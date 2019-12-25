@@ -56,25 +56,24 @@
         <div class="nav-wrapper">
           <ul>
             <li>
-              <a href="#!"><i class="material-icons">menu</i></a>
+              <a><i class="material-icons">menu</i></a>
             </li>
-            <li><a class="title" href="#!">Dashboard</a></li>
+            <li><a class="title">Dashboard</a></li>
           </ul>
         </div>
       </nav>
     </div>
 
     <ul class="side-nav fixed transparent z-depth-0">
-      <li class="active">
-        <a href="#"><i class="material-icons">favorite</i>Dashboard</a>
+      <li>
+        <a class="favorites-trigger active"><i class="material-icons">favorite</i>Dashboard</a>
       </li>
       <li>
-        <a href="#"
-          ><i class="material-icons">attach_money</i>Cryptocurrencies</a
-        >
+        <a class='crypto-trigger'>
+          <i class="material-icons">attach_money</i>Cryptocurrencies</a>
       </li>
       <li>
-        <a href="#"><i class="material-icons">pie_chart</i>Stocks</a>
+        <a class='stocks-trigger'><i class="material-icons">pie_chart</i>Stocks</a>
       </li>
       <li>
         <div class="divider"></div>
@@ -83,7 +82,7 @@
     <div class="main">
       <div class="container-fluid">
         <!-- favorites content -->
-        <div class="row">
+        <div class="row favorites-row">
           <h2>Favorites</h2>
           <div class="col s12 m6 mb-1">
             <div class="card">

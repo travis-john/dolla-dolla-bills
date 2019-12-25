@@ -236,6 +236,9 @@ cryptoTrigger.click(function() {
   $('.crypto-charts-row').removeClass('d-none');
   $('.crypto-news-row').removeClass('d-none');
   $('.favorites-row').addClass('d-none');
+  favoriteTrigger.removeClass('active');
+  stocksTrigger.removeClass('active');
+  cryptoTrigger.addClass('active');
   renderCryptoNews();
   renderCryptoRates();
 });
@@ -249,6 +252,9 @@ stocksTrigger.click(function() {
   $('.stocks-charts-row').removeClass('d-none');
   $('.stocks-news-row').removeClass('d-none');
   $('.favorites-row').addClass('d-none');
+  favoriteTrigger.removeClass('active');
+  cryptoTrigger.removeClass('active');
+  stocksTrigger.addClass('active');
   renderStocksNews();
 });
 
@@ -261,6 +267,10 @@ favoriteTrigger.click(function() {
   $('.stocks-charts-row').addClass('d-none');
   $('.stocks-news-row').addClass('d-none');
   $('.favorites-row').removeClass('d-none');
+  cryptoTrigger.removeClass('active');
+  stocksTrigger.removeClass('active');
+  favoriteTrigger.addClass('active');
+
 });
 
 $('.add-favorite').click(function() {
