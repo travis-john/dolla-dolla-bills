@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Dolla Dolla Bills</title>
-    <meta name="description" content="DESCRIPTION" />
-    <!--
+
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <title>Dolla Dolla Bills</title>
+  <meta name='description' content='DESCRIPTION'>
+  <!--
 
     Adding Yoda because it's cool
     __.-._
@@ -15,27 +17,29 @@
 
   -->
 
-    <!--[if lt IE 9]>
-      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <!--[if lt IE 9]>
+      <script src = 'http://html5shiv.googlecode.com/svn/trunk/html5.js'></script>
     <![endif]-->
 
-    <!-- Materialize CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"
-    />
+  <!-- Materialize CSS -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css'>
 
-    <!-- Materialize Icons -->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
+  <!-- Materialize Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <!-- Importing Roboto and Roboto Slab from Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Firebase JS -->
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+
+  <!-- Firebase CSS -->
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+  <!-- Importing Roboto and Roboto Slab from Google Fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap' rel='stylesheet'>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+  <!-- Custom CSS -->
+  <link rel='stylesheet' href='assets/css/dashboard.css'>
 
     <!-- Anychart Script-->
     <script
@@ -46,7 +50,6 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/dashboard.css" />
   </head>
-
   <body>
     <div class="navbar-fixed">
       <nav>
@@ -128,201 +131,141 @@
           </div>
         </div>
 
-        <!-- crypto content -->
-        <div class="row crypto-charts-row d-none">
-          <h2>Cryptocurrency Trends</h2>
-          <div class="col s12 m6 mb-1">
-            <div class="card">
-              <div class="card-content valign-wrapper">
-                <div class="card-text">
-                  <span class="card-title">Stock Title</span>
-                  <a
-                    class="btn-floating halfway-fab waves-effect waves-light red"
-                    ><i class="material-icons">add</i></a
-                  >
-                  <i>Chart Here</i>
-                </div>
-              </div>
-              <div class="card-action"><a href="#">View report</a></div>
-            </div>
+      <!-- crypto content -->
+      <div class="row crypto-charts-row d-none">
+        <h2>Cryptocurrency Trends</h2>
+        <div class="row crypto-search-row">
+          <div class="input-field crypto-input col s10">
+            <input placeholder="Coin ID (e.g BTC)" id="crypto-search" type="text">
+            <label class='search-label' for="crypto-search">Search</label>
           </div>
-          <div class="col s12 m6 mb-1">
-            <div class="card">
-              <div class="card-content valign-wrapper">
-                <div class="card-text">
-                  <span class="card-title">Stock Title</span>
-                  <a
-                    class="btn-floating halfway-fab waves-effect waves-light red"
-                    ><i class="material-icons">add</i></a
-                  >
-                  <i>Chart Here</i>
-                </div>
-              </div>
-              <div class="card-action"><a href="#">View report</a></div>
-            </div>
-          </div>
-          <div class="col s12 m6 mb-1">
-            <div class="card">
-              <div class="card-content valign-wrapper">
-                <div class="card-text">
-                  <span class="card-title">Stock Title</span>
-                  <a
-                    class="btn-floating halfway-fab waves-effect waves-light red"
-                    ><i class="material-icons">add</i></a
-                  >
-                  <i>Chart Here</i>
-                </div>
-              </div>
-              <div class="card-action"><a href="#">View report</a></div>
-            </div>
-          </div>
-          <div class="col s12 m6 mb-1">
-            <div class="card">
-              <div class="card-content valign-wrapper">
-                <div class="card-text">
-                  <span class="card-title">Stock Title</span>
-                  <a
-                    class="btn-floating halfway-fab waves-effect waves-light red"
-                    ><i class="material-icons">add</i></a
-                  >
-                  <i>Chart Here</i>
-                </div>
-              </div>
-              <div class="card-action"><a href="#">View report</a></div>
-            </div>
+          <div class="col s2">
+            <button class="btn waves-effect waves-light red" type="submit" id="crypto-submit" name="action">Submit
+              <i class="material-icons right">send</i>
+            </button>
           </div>
         </div>
-        <div class="row crypto-news-row d-none">
-          <div class="col s12 m12">
-            <div class="card">
-              <table class="bordered highlight">
-                <thead>
-                  <tr>
-                    <th colspan="2">TODO List</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Upgrade to SSD harddisks</td>
-                  </tr>
-                  <tr>
-                    <td>Pay server invoice</td>
-                  </tr>
-                  <tr>
-                    <td>Upgrade to SSD harddisks</td>
-                  </tr>
-                  <tr>
-                    <td>Pay server invoice</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+        <div class="row crypto-cards-row">
+        </div>
+      </div>
+      <div class="row crypto-news-row d-none">
+        <div class="col s12 m12">
+          <div class="card">
+            <table class="bordered highlight">
+              <thead>
+                <tr>
+                  <th colspan="2">
+                    <h2>Lastest Crypto News</h2>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="crypto-news-tbody">
+              </tbody>
+            </table>
           </div>
         </div>
+      </div>
 
-        <!-- stocks content -->
-        <div class="row stocks-charts-row d-none">
-          <h2>Stock Trends</h2>
-          <div class="col s12 m6 mb-1">
-            <div class="card">
-              <div class="card-content valign-wrapper">
-                <div class="card-text">
-                  <span class="card-title">Stock Title</span>
-                  <a
-                    class="btn-floating halfway-fab waves-effect waves-light red"
-                    ><i class="material-icons">add</i></a
-                  >
-                  <i>Chart Here</i>
-                </div>
+      <!-- stocks content -->
+      <div class="row stocks-charts-row d-none">
+        <h2>Stock Trends</h2>
+        <div class="input-field stocks-input col s10">
+          <input placeholder="Stock ID (e.g MSFT)" id="stocks-search" type="text" class="validate">
+          <label class='search-label' for="stocks-search">Search</label>
+        </div>
+        <div class="col s2">
+          <button class="btn waves-effect waves-light red" type="submit" id="stocks-submit" name="action">Submit
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+        <div class="col s12 m6 mb-1">
+          <div class="card">
+            <div class="card-content valign-wrapper">
+              <div class="card-text">
+                <span class="card-title">Stock Title</span>
+                <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
+                <i>Chart Here</i>
               </div>
               <div class="card-action"><a href="#">View report</a></div>
             </div>
-          </div>
-          <div class="col s12 m6 mb-1">
-            <div class="card">
-              <div class="card-content valign-wrapper">
-                <div class="card-text">
-                  <span class="card-title">Stock Title</span>
-                  <a
-                    class="btn-floating halfway-fab waves-effect waves-light red"
-                    ><i class="material-icons">add</i></a
-                  >
-                  <i>Chart Here</i>
-                </div>
-              </div>
-              <div class="card-action"><a href="#">View report</a></div>
-            </div>
-          </div>
-          <div class="col s12 m6 mb-1">
-            <div class="card">
-              <div class="card-content valign-wrapper">
-                <div class="card-text">
-                  <span class="card-title">Stock Title</span>
-                  <a
-                    class="btn-floating halfway-fab waves-effect waves-light red"
-                    ><i class="material-icons">add</i></a
-                  >
-                  <i>Chart Here</i>
-                </div>
-              </div>
-              <div class="card-action"><a href="#">View report</a></div>
-            </div>
-          </div>
-          <div class="col s12 m6 mb-1">
-            <div class="card">
-              <div class="card-content valign-wrapper">
-                <div class="card-text">
-                  <span class="card-title">Stock Title</span>
-                  <a
-                    class="btn-floating halfway-fab waves-effect waves-light red"
-                    ><i class="material-icons">add</i></a
-                  >
-                  <i>Chart Here</i>
-                </div>
-              </div>
-              <div class="card-action"><a href="#">View report</a></div>
-            </div>
+            <div class="card-action"><a href="#">View report</a></div>
           </div>
         </div>
-        <div class="row stocks-news-row d-none">
-          <div class="col s12 m12">
-            <div class="card">
-              <table class="bordered highlight">
-                <thead>
-                  <tr>
-                    <th colspan="2">TODO List</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Upgrade to SSD harddisks</td>
-                  </tr>
-                  <tr>
-                    <td>Pay server invoice</td>
-                  </tr>
-                  <tr>
-                    <td>Upgrade to SSD harddisks</td>
-                  </tr>
-                  <tr>
-                    <td>Pay server invoice</td>
-                  </tr>
-                </tbody>
-              </table>
+        <div class="col s12 m6 mb-1">
+          <div class="card">
+            <div class="card-content valign-wrapper">
+              <div class="card-text">
+                <span class="card-title">Stock Title</span>
+                <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
+                <i>Chart Here</i>
+              </div>
+              <div class="card-action"><a href="#">View report</a></div>
             </div>
+            <div class="card-action"><a href="#">View report</a></div>
+          </div>
+        </div>
+        <div class="col s12 m6 mb-1">
+          <div class="card">
+            <div class="card-content valign-wrapper">
+              <div class="card-text">
+                <span class="card-title">Stock Title</span>
+                <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
+                <i>Chart Here</i>
+              </div>
+              <div class="card-action"><a href="#">View report</a></div>
+            </div>
+            <div class="card-action"><a href="#">View report</a></div>
+          </div>
+        </div>
+        <div class="col s12 m6 mb-1">
+          <div class="card">
+            <div class="card-content valign-wrapper">
+              <div class="card-text">
+                <span class="card-title">Stock Title</span>
+                <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
+                <i>Chart Here</i>
+              </div>
+            </div>
+            <div class="card-action"><a href="#">View report</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="row stocks-news-row d-none">
+        <div class="col s12 m12">
+          <div class="card">
+            <table class="bordered highlight">
+              <thead>
+                <tr>
+                  <th colspan="2">
+                    <h2>Latest Stocks News</h2>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="stocks-news-body">
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- JQuery -->
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-      crossorigin="anonymous"
-    ></script>
+  <!-- JQuery -->
+  <script src='https://code.jquery.com/jquery-3.4.1.min.js' integrity='sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=' crossorigin='anonymous'></script>
 
-    <!-- Materialize JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!-- Materialize JS -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-auth.js"></script>
+
+  <!-- Custom JS -->
+  <script src='assets/js/index.js'></script>
+</body>
 
     <!-- Stocks JS  -->
     <script src="assets/js/stocks.js"></script>
