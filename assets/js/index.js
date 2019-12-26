@@ -109,6 +109,8 @@ var cryptoAPIKey = '04cba1c6d138450a061c3b153a670503a29f5ea26e47756654c8e18a11b9
 
 function renderCryptoRates() {
 
+  $('.crypto-cards-row').empty();
+
   $.ajax({
     url: coinlibQueryURL,
     method: 'GET'
