@@ -223,46 +223,81 @@
 
 // Searching Stock and Populating Div - Stock Trends 
 
-// Step 1: Create function to search for stock tickers
-$("#stocks-submit").on("click", function(event) {
-  var searchTicker = $("#stocks-search").val().trim();
+function renderStockRates() {
+  var stockAPI = '73cdYy54IDQYfiqTXJ3tjQobUdFErpCqhd74BdZERF6rLfclhO5ubZeoVv9O';
+  var stockInfo =
+      "https://api.worldtradingdata.com/api/v1/stock?symbol=MSFT,SNAP,TWTR,VOD.L&api_token=" + stockAPI;
 
+  $.ajax({
+    url: stockInfo,
+    method: "GET"
+  }).then(function (info) {
+    console.log(info);
+
+    for (var i = 0; i < info.data.length; i++) {
+      var stocksRow = $('.stock-cards-row');
+
+      stocksRow.append(`
+    <div class="col s12 m6 mb-1">
+      <div class="card">
+        <div class="card-content valign-wrapper">
+          <div class="card-text">
+            <span class="card-title">${info.data[i].name}</span>
+            <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
+            <div class='row'>
+              <div class='col s6'>
+                <ul><li><b>Price: </b>$${info.data[i].price}</li><li><b>Day High: </b>$${info.data[i].day_high}<li><li><b>Day Low: </b>$${info.data[i].day_low}</li></ul>
+              </div>
+              <div class='col s6'>
+                <ul><li><b>Day Change: </b>$ ${info.data[i].day_change}</li><li><b>Change Percent: </b>${info.data[i].change_pct}%<li></ul>
+              </div>
+            </div>
+            <i>Chart Here</i>
+          </div>
+        </div>
+        <div class="card-action"><a href="#">View report</a></div>
+      </div>
+    </div>`);
+    }
+  })
+}
+
+// Step 1: Create function to search for stock tickers
+$("#stocks-submit").on("click", function () {
+  var searchTicker = $("#stocks-search").val().trim();
+  var stockAPI = '73cdYy54IDQYfiqTXJ3tjQobUdFErpCqhd74BdZERF6rLfclhO5ubZeoVv9O';
   var searchURL =
-    'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + searchTicker + '&interval=5min&apikey=K2SXCCKWX3DOOWN4';
+    "https://api.worldtradingdata.com/api/v1/stock?symbol=" + searchTicker + "&api_token=" + stockAPI;
 
   $.ajax({
     url: searchURL,
     method: "GET"
-  }).then(function(search) {
+  }).then(function (search) {
     console.log(search);
-    var searchParam = search["Time Series (5min)"];
 
-    var chartData = [];
-    for (var key in searchParam) {
-      var timeStocks = searchParam[key]["1. open"];
+    var newStock = $('.stock-cards-row');
 
-      chartData.push({
-        x: key,
-        value: timeStocks
-      });
-    }
-    anychart.onDocumentReady(function() {
-      // data
-      data = anychart.data.set(chartData);
-
-      // set chart type
-      var newChart = anychart.area();
-
-      // set data
-      var areaNew = newChart.splineArea(data);
-
-      //   Delete X-axis information
-      var searchLabel = newChart.xAxis().labels();
-      searchLabel.enabled(false);
-
-      // set container and draw chart
-      newChart.container("new-chart-1").draw();
-    });
+    newStock.prepend(`
+      <div class="col s12 m6 mb-1">
+        <div class="card">
+          <div class="card-content valign-wrapper">
+            <div class="card-text">
+              <span class="card-title">${search.data[0].name}</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
+              <div class='row'>
+                <div class='col s6'>
+                  <ul><li><b>Price: </b>$${search.data[0].price}</li><li><b>Day High: </b>$${search.data[0].day_high}<li><li><b>Day Low: </b>$${search.data[0].day_low}</li></ul>
+                </div>
+                <div class='col s6'>
+                  <ul><li><b>Day Change: </b>$ ${search.data[0].day_change}</li><li><b>Change Percent: </b>${search.data[0].change_pct}%<li></ul>
+                </div>
+              </div>
+              <i>Chart Here</i>
+            </div>
+          </div>
+          <div class="card-action"><a href="#">View report</a></div>
+        </div>
+      </div>`);
   });
 })
 

@@ -217,9 +217,6 @@ $('#crypto-submit').click(function(){
 });
 
 
-
-
-
 ///// SWITCHING BETWEEN TABS IN DASHBOARD /////
 cryptoTrigger.click(function() {
   $('.favorites').removeClass('active');
@@ -250,6 +247,7 @@ stocksTrigger.click(function() {
   cryptoTrigger.removeClass('active');
   stocksTrigger.addClass('active');
   renderStocksNews();
+  renderStockRates();
 });
 
 favoriteTrigger.click(function() {
