@@ -120,7 +120,7 @@ function renderCryptoRates() {
     for (var i = 0; i < cryptoResponse.coins.length; i++) {
       var cardsRow = $('.crypto-cards-row');
       cardsRow.append(`
-              <div class="col s12 m6 mb-1">
+              <div class="col s12 m6 mb-1" id="${cryptoResponse.coins[i].name}">
                 <div class="card">
                   <div class="card-content valign-wrapper">
                     <div class="card-text">
