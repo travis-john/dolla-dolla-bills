@@ -14,55 +14,19 @@
 //   });
 // }
 
+
+
 renderFavorites()
 
 
 // ALPHA VANTAGE + ANYCHART - Rendering and Creating Stock Charts - TO BE UPDATED
-// function stockChart() {
-//   var chartQuery =
-//     "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&apikey=TTJMFECFAT8Y4P9E";
 
-//   $.ajax({
-//     url: chartQuery,
-//     method: "GET"
-//   }).then(function(msft) {
-//     // First JSON object
-//     var timeSeries1 = msft["Time Series (5min)"];
-
-//     var chartData = [];
-//     for (var key in timeSeries1) {
-//       var timeStocks = timeSeries1[key]["1. open"];
-
-//       chartData.push({
-//         x: key,
-//         value: timeStocks
-//       });
-//     }
-//     anychart.onDocumentReady(function() {
-//       // data
-//       data = anychart.data.set(chartData);
-
-//       // set chart type
-//       var chart1 = anychart.area();
-
-//       // set data
-//       var area1 = chart1.splineArea(data);
-
-//       //   Delete X-axis information
-//       var labels1 = chart1.xAxis().labels();
-//       labels1.enabled(false);
-
-//       // set container and draw chart
-//       chart1.container("msft-stock-chart").draw();
-//     });
-//   });
-// }
 
 // WORLD TRADE DATA API - Favorites Page
 function renderFavorites() {
   var stockAPI = '73cdYy54IDQYfiqTXJ3tjQobUdFErpCqhd74BdZERF6rLfclhO5ubZeoVv9O';
   var stockInfo =
-      "https://api.worldtradingdata.com/api/v1/stock?symbol=GOOGL,APPL,AMZN,BABA,VZ&api_token=" + stockAPI;
+    "https://api.worldtradingdata.com/api/v1/stock?symbol=GOOGL,APPL,AMZN,BABA,VZ&api_token=" + stockAPI;
 
   $.ajax({
     url: stockInfo,
@@ -88,7 +52,7 @@ function renderFavorites() {
                 <ul><li><b>Day Change: </b>$ ${info.data[i].day_change}</li><li><b>Change Percent: </b>${info.data[i].change_pct}%<li></ul>
               </div>
             </div>
-            <i>Chart Here</i>
+            <div id='stock-chart'></div>
           </div>
         </div>
         <div class="card-action"><a href="#">View report</a></div>
@@ -102,7 +66,7 @@ function renderFavorites() {
 function renderStockRates() {
   var stockAPI = '73cdYy54IDQYfiqTXJ3tjQobUdFErpCqhd74BdZERF6rLfclhO5ubZeoVv9O';
   var stockInfo =
-      "https://api.worldtradingdata.com/api/v1/stock?symbol=MSFT,SNAP,TWTR,VOD.L&api_token=" + stockAPI;
+    "https://api.worldtradingdata.com/api/v1/stock?symbol=MSFT,SNAP,TWTR,VOD.L&api_token=" + stockAPI;
 
   $.ajax({
     url: stockInfo,
@@ -128,7 +92,7 @@ function renderStockRates() {
                 <ul><li><b>Day Change: </b>$ ${info.data[i].day_change}</li><li><b>Change Percent: </b>${info.data[i].change_pct}%<li></ul>
               </div>
             </div>
-            <i>Chart Here</i>
+            <div id='stock-chart'></div>
           </div>
         </div>
         <div class="card-action"><a href="#">View report</a></div>
@@ -140,6 +104,7 @@ function renderStockRates() {
 
 // WORLD TRADE DATA API: Searching and adding stocks
 $("#stocks-submit").on("click", function () {
+  renderStockChart();
   var searchTicker = $("#stocks-search").val().trim();
   var stockAPI = '73cdYy54IDQYfiqTXJ3tjQobUdFErpCqhd74BdZERF6rLfclhO5ubZeoVv9O';
   var searchURL =
@@ -168,7 +133,7 @@ $("#stocks-submit").on("click", function () {
                   <ul><li><b>Day Change: </b>$ ${search.data[0].day_change}</li><li><b>Change Percent: </b>${search.data[0].change_pct}%<li></ul>
                 </div>
               </div>
-              <i>Chart Here</i>
+              <div id='stock-chart'></div>
             </div>
           </div>
           <div class="card-action"><a href="#">View report</a></div>
@@ -177,3 +142,44 @@ $("#stocks-submit").on("click", function () {
   });
 })
 
+function renderStockChart() {
+  var chartSearch = $("#stocks-search").val().trim();
+  var chartQuery =
+    "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + chartSearch + "&interval=5min&apikey=K2SXCCKWX3DOOWN4";
+
+  $.ajax({
+    url: chartQuery,
+    method: "GET"
+  }).then(function (chart) {
+    console.log(chart);
+
+    var timeSeries = chart["Time Series (5min)"];
+
+    var chartData = [];
+    for (var key in timeSeries) {
+      var timeStocks = timeSeries[key]["1. open"];
+
+      chartData.push({
+        x: key,
+        value: timeStocks
+      });
+    }
+    anychart.onDocumentReady(function () {
+      // data
+      data = anychart.data.set(chartData);
+
+      // set chart type
+      var chart = anychart.area();
+
+      // set data
+      var area = chart.splineArea(data);
+
+      //   Delete X-axis information
+      var labels = chart.xAxis().labels();
+      labels.enabled(false);
+
+      // set container and draw chart
+      chart.container("stock-chart").draw();
+    });
+  });
+}
