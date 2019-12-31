@@ -100,6 +100,8 @@ function renderFavorites() {
 
 // WORLD TRADE DATA API - Stocks Page
 function renderStockRates() {
+  $('.stock-cards-row').empty();
+  
   var stockAPI = '73cdYy54IDQYfiqTXJ3tjQobUdFErpCqhd74BdZERF6rLfclhO5ubZeoVv9O';
   var stockInfo =
       "https://api.worldtradingdata.com/api/v1/stock?symbol=MSFT,SNAP,TWTR,VOD.L&api_token=" + stockAPI;
