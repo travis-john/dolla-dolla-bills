@@ -262,7 +262,6 @@ favoriteTrigger.click(function() {
   cryptoTrigger.removeClass('active');
   stocksTrigger.removeClass('active');
   favoriteTrigger.addClass('active');
-
 });
 
 $('.add-favorite').click(function() {
