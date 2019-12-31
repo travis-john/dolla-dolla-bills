@@ -5,3 +5,6 @@ cryptocompare: 04cba1c6d138450a061c3b153a670503a29f5ea26e47756654c8e18a11b9306e
 alphavantage: TTJMFECFAT8Y4P9E, K2SXCCKWX3DOOWN4
 
 New York Times: jnU2uozAn1FRTD9raWPlcQsox5hokuSC
+
+World Trading Data: 73cdYy54IDQYfiqTXJ3tjQobUdFErpCqhd74BdZERF6rLfclhO5ubZeoVv9O
+
