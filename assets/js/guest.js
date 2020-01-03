@@ -57,12 +57,11 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 /////  NYT API CODE START /////
 var cryptoTrigger = $('.crypto-trigger'),
-  stocksTrigger = $('.stocks-trigger'),
-  guestTrigger =$('.guest-favorite'),
-  favoriteTrigger = $('.favorites-trigger'),
-  NYTAPIKEY = 'jnU2uozAn1FRTD9raWPlcQsox5hokuSC',
-  cryptoQueryURL = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=cryptocurrency&fq=newest&api-key=' + NYTAPIKEY;
-stocksQueryURl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=stocks&fq=newest&api-key=' + NYTAPIKEY;
+    stocksTrigger = $('.stocks-trigger'),
+    favoriteTrigger = $('.favorites-trigger'),
+    NYTAPIKEY = 'jnU2uozAn1FRTD9raWPlcQsox5hokuSC',
+    cryptoQueryURL = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=cryptocurrency&fq=newest&api-key=' + NYTAPIKEY;
+    stocksQueryURl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=stocks&fq=newest&api-key=' + NYTAPIKEY;
 
 function renderCryptoNews() {
   $.ajax({
@@ -127,7 +126,7 @@ function renderCryptoRates() {
                   <div class="card-content valign-wrapper">
                     <div class="card-text">
                       <span class="card-title">${cryptoResponse.coins[i].name}</span>
-                      <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
+                      <button class="btn-floating halfway-fab waves-effect waves-light red" id='guest-favorite'><i class="material-icons">add</i></button>
                       <div class='row'>
                         <div class='col s6'>
                           <ul><li><b>Price: </b>$${cryptoResponse.coins[i].price}</li><li><b>Day High: </b>${cryptoResponse.coins[i].high_24h}<li><li><b>Day Low: </b>${cryptoResponse.coins[i].low_24h}</li></ul>
@@ -165,7 +164,7 @@ function renderCryptoRates() {
   //             <div class="card-content valign-wrapper">
   //               <div class="card-text">
   //                 <span class="card-title">${basicCryptoResponse.Data[i].CoinInfo.FullName}</span>
-  //                 <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
+  //                 <a class="btn-floating halfway-fab waves-effect waves-light red guest-favorite"><i class="material-icons">add</i></a>
   //                     <span><b>Price:</b>${priceCryptoResponse.DISPLAY[i].USD.PRICE}</span>
   //               </div>
   //             </div>
@@ -184,40 +183,7 @@ function renderCryptoRates() {
 ///// CRYPTO SEARCH FUNCTION /////
 
 $('#crypto-submit').click(function(){
-  var coin = $('#crypto-search').val().trim(),
-      cryptoSearchAPIKEY = 'cc91d6b22f005e77',
-      cryptoSearchURL = 'https://coinlib.io/api/v1/coin?key=' + cryptoSearchAPIKEY + '&pref=USD&symbol=' + coin;
-
-      $.ajax({
-        url: cryptoSearchURL,
-        method: 'GET'
-      }).then(function(cryptoSearchResponse){
-        console.log(cryptoSearchResponse);
-        var cardsRow = $('.crypto-cards-row');
-
-        cardsRow.prepend(`
-          <div class="col s12 m6 mb-1">
-            <div class="card">
-              <div class="card-content valign-wrapper">
-                <div class="card-text">
-                  <span class="card-title">${cryptoSearchResponse.name}</span>
-                  <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
-                  <div class='row'>
-                    <div class='col s6'>
-                      <ul><li><b>Price: </b>$${cryptoSearchResponse.price}</li><li><b>Day High: </b>${cryptoSearchResponse.high_24h}<li><li><b>Day Low: </b>${cryptoSearchResponse.low_24h}</li></ul>
-                    </div>
-                    <div class='col s6'>
-                      <ul><li><b>Hourly Change: </b>$${cryptoSearchResponse.delta_1h}</li><li><b>Daily Change: </b>${cryptoSearchResponse.delta_24h}<li><li><b>Weekly Change: </b>${cryptoSearchResponse.delta_7d}</li></ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-action"><a href="#">View report</a></div>
-            </div>
-          </div>`);
-
-
-      });
+  alert('Register as a user to access features');
 });
 
 
@@ -268,14 +234,6 @@ favoriteTrigger.click(function() {
   favoriteTrigger.addClass('active');
 });
 
-$('.add-favorite').click(function() {
-
-  //// add favorite function here /////
-
-});
-
-$('.remove-favorite').click(function() {
-
-  ///// remove favorite function here /////
-
+$('#guest-favorite').click(function(){
+  alert('Register as a user to access full features');
 });
