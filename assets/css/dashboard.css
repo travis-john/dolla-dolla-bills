@@ -124,6 +124,13 @@ nav, nav .nav-wrapper i, .navbar-fixed {
     position: relative;
     padding-bottom: 0;
   }
+  .crypto-input, .stocks-input {
+    width: 100% !important;
+  }
+  .submit-button-div {
+    width: 100% !important;
+    margin-bottom: 1rem;
+  }
 }
 
 @media screen and (max-width: 602px){
