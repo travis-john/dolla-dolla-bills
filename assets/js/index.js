@@ -270,12 +270,14 @@ favoriteTrigger.click(function() {
 
 $('.add-favorite').click(function() {
 
-  //// add favorite function here /////
+  console.log("hello");
+
 
 });
 
 $('.remove-favorite').click(function() {
 
+  console.log("hello");
   ///// remove favorite function here /////
 
 });

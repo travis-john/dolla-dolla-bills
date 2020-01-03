@@ -74,7 +74,7 @@ function renderFavorites() {
       var stocksRow = $('.fav-cards-row');
 
       stocksRow.append(`
-    <div class="col s12 m6 mb-1">
+    <div class="col s12 m6 mb-1 id="${info.data[i].name}"">
       <div class="card">
         <div class="card-content valign-wrapper">
           <div class="card-text">
@@ -156,7 +156,7 @@ $("#stocks-submit").on("click", function () {
     var newStock = $('.stock-cards-row');
 
     newStock.prepend(`
-      <div class="col s12 m6 mb-1">
+      <div class="col s12 m6 mb-1" id="${info.data[i].name}">
         <div class="card">
           <div class="card-content valign-wrapper">
             <div class="card-text">
