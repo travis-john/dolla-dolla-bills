@@ -79,7 +79,7 @@ function renderFavorites() {
         <div class="card-content valign-wrapper">
           <div class="card-text">
             <span class="card-title">${info.data[i].name}</span>
-            <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
+            <a class="btn-floating halfway-fab waves-effect waves-light red remove-favorite"><i class="material-icons">remove</i></a>
             <div class='row'>
               <div class='col s6'>
                 <ul><li><b>Price: </b>$${info.data[i].price}</li><li><b>Day High: </b>$${info.data[i].day_high}<li><li><b>Day Low: </b>$${info.data[i].day_low}</li></ul>
@@ -101,7 +101,7 @@ function renderFavorites() {
 // WORLD TRADE DATA API - Stocks Page
 function renderStockRates() {
   $('.stock-cards-row').empty();
-  
+
   var stockAPI = '73cdYy54IDQYfiqTXJ3tjQobUdFErpCqhd74BdZERF6rLfclhO5ubZeoVv9O';
   var stockInfo =
       "https://api.worldtradingdata.com/api/v1/stock?symbol=MSFT,SNAP,TWTR,VOD.L&api_token=" + stockAPI;
@@ -178,4 +178,3 @@ $("#stocks-submit").on("click", function () {
       </div>`);
   });
 })
-
