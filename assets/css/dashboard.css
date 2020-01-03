@@ -109,6 +109,28 @@ nav, nav .nav-wrapper i, .navbar-fixed {
     border-radius: 2px;
   }
 }
+
+@media screen and (max-width: 992px) {
+  .side-nav {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .side-nav.fixed {
+    transform: translateX(0);
+    position: relative;
+    padding-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 602px){
+  .side-nav {
+    display: block;
+  }
+}
 /* cards */
 .card .card-action {
   border-top: none;
