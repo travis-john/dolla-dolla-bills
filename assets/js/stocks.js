@@ -128,59 +128,73 @@ $("#stocks-submit").on("click", function () {
                   <ul><li><b>Day Change: </b>$ ${search.data[0].day_change}</li><li><b>Change Percent: </b>${search.data[0].change_pct}%<li></ul>
                 </div>
               </div>
-              <div id="stock-chart"></div>
+              <canvas id="mycanvas"></canvas>
             </div>
           </div>
           <div class="card-action"><a href="#">View report</a></div>
         </div>
       </div>`);
   });
-
   renderCharts();
-
 })
 
-// ALPHA VANTAGE + ANYCHART - Rendering and Creating Stock Charts - TO BE UPDATED
-function renderCharts () {
-  var searchTicker = $("#stocks-search").val().trim();
-  var chartQuery =
-    "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + searchTicker + "&interval=5min&apikey=TTJMFECFAT8Y4P9E";
-
-  $.ajax({
-    url: chartQuery,
-    method: "GET"
-  }).then(function (chart) {
-
-    console.log(chart);
-    var timeSeries = chart["Time Series (5min)"];
-
-    var chartData = [];
-    for (var key in timeSeries) {
-      var timeStocks = timeSeries[key]["1. open"];
-
-      chartData.push({
-        x: key,
-        value: timeStocks
-      });
+// ALPHA VANTAGE + CHART.JS - Rendering and Creating Stock Charts - TO BE UPDATED
+// create initial empty chart
+var ctx_live = document.getElementById("mycanvas");
+var myChart = new Chart(ctx_live, {
+  type: 'area',
+  data: {
+    labels: [],
+    datasets: [{
+      data: [],
+      borderWidth: 1,
+      borderColor: '#00c0ef',
+      label: 'liveCount',
+    }]
+  },
+  options: {
+    responsive: true,
+    title: {
+      display: true,
+      text: "Intra-Day Stocks",
+    },
+    legend: {
+      display: false
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+        }
+      }]
     }
-    anychart.onDocumentReady(function () {
-      // data
-      data = anychart.data.set(chartData);
+  }
+});
 
-      // set chart type
-      var chart1 = anychart.area();
+function renderCharts() {
+  // Search Parameters to drive example data
+  var searchTicker = $("#stocks-search").val().trim();
+  var chartAPI = "73cdYy54IDQYfiqTXJ3tjQobUdFErpCqhd74BdZERF6rLfclhO5ubZeoVv9O";
 
-      // set data
-      var area1 = chart1.splineArea(data);
+  // logic to get new data
+  var getData = function () {
+    $.ajax({
+      url: "https://intraday.worldtradingdata.com/api/v1/intraday?symbol=" + searchTicker + "&range=1&interval=5&api_token=" + chartAPI,
+      success: function (data) {
+        console.log(data);
+        // process your data to pull out what you plan to use to update the chart
+        // e.g. new label and a new data point
+        // for (let i = 0; i < data.intraday.length; i++) {
+        //   myChart.data.labels.push("Post " + postId++);
+        //   myChart.data.datasets[0].data.push(getRandomIntInclusive(1, 25));
 
-      //   Delete X-axis information
-      var labels = chart1.xAxis().labels();
-      labels.enabled(false);
-
-      // set container and draw chart
-      var stockChart = $("#stock-chart");
-      stockChart.prepend(chart1.container('stock-chart').draw());
+        // add new label and data point to chart's underlying data structures
+        // re-render the chart
+        myChart.update();
+      }
     });
-  });
+  };
+  // Get new data every 5 minutes
+  setInterval(getData, 300000);
 }
 
