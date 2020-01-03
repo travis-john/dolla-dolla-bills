@@ -60,42 +60,62 @@ renderFavorites()
 
 // WORLD TRADE DATA API - Favorites Page
 function renderFavorites() {
-  var stockAPI = '73cdYy54IDQYfiqTXJ3tjQobUdFErpCqhd74BdZERF6rLfclhO5ubZeoVv9O';
-  var stockInfo =
-      "https://api.worldtradingdata.com/api/v1/stock?symbol=GOOGL,APPL,AMZN,BABA,VZ&api_token=" + stockAPI;
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      var userId = firebase.auth().currentUser.uid;
+      return firebase.database().ref('/users/' + userId + '/favorites/').once('value').then(function(snapshot) {
+        var favorites = (snapshot.val());
+        var keys = Object.keys(favorites);
+        
+        for (var i = 0; i < keys.length; i++) {
 
-  $.ajax({
-    url: stockInfo,
-    method: "GET"
-  }).then(function (info) {
-    console.log(info);
 
-    for (var i = 0; i < info.data.length; i++) {
-      var stocksRow = $('.fav-cards-row');
-
-      stocksRow.append(`
-    <div class="col s12 m6 mb-1">
-      <div class="card">
-        <div class="card-content valign-wrapper">
-          <div class="card-text">
-            <span class="card-title">${info.data[i].name}</span>
-            <a class="btn-floating halfway-fab waves-effect waves-light red remove-favorite"><i class="material-icons">remove</i></a>
-            <div class='row'>
-              <div class='col s6'>
-                <ul><li><b>Price: </b>$${info.data[i].price}</li><li><b>Day High: </b>$${info.data[i].day_high}<li><li><b>Day Low: </b>$${info.data[i].day_low}</li></ul>
-              </div>
-              <div class='col s6'>
-                <ul><li><b>Day Change: </b>$ ${info.data[i].day_change}</li><li><b>Change Percent: </b>${info.data[i].change_pct}%<li></ul>
-              </div>
-            </div>
-            <i>Chart Here</i>
-          </div>
-        </div>
-        <div class="card-action"><a href="#">View report</a></div>
-      </div>
-    </div>`);
+          
+          var coin = keys[i].trim();
+          cryptoSearchAPIKEY = 'cc91d6b22f005e77',
+          cryptoSearchURL = 'https://coinlib.io/api/v1/coin?key=' + cryptoSearchAPIKEY + '&pref=USD&symbol=' + coin;
+    
+          $.ajax({
+            url: cryptoSearchURL,
+            method: 'GET'
+          }).then(function(cryptoSearchResponse){
+            console.log(cryptoSearchResponse);
+            var favrow = $('.fav-cards-row');
+    
+            favrow.prepend(`
+              <div class="col s12 m6 mb-1">
+                <div class="card">
+                  <div class="card-content valign-wrapper">
+                    <div class="card-text">
+                      <span class="card-title">${cryptoSearchResponse.name}</span>
+                      <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
+                      <div class='row'>
+                        <div class='col s6'>
+                          <ul><li><b>Price: </b>$${cryptoSearchResponse.price}</li><li><b>Day High: </b>${cryptoSearchResponse.high_24h}<li><li><b>Day Low: </b>${cryptoSearchResponse.low_24h}</li></ul>
+                        </div>
+                        <div class='col s6'>
+                          <ul><li><b>Hourly Change: </b>$${cryptoSearchResponse.delta_1h}</li><li><b>Daily Change: </b>${cryptoSearchResponse.delta_24h}<li><li><b>Weekly Change: </b>${cryptoSearchResponse.delta_7d}</li></ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-action"><a href="#">View report</a></div>
+                </div>
+              </div>`);
+    
+    
+          });
+        }
+    
+        // ...
+      })
+      // User is signed in.
+    } else {
+      // No user is signed in.
     }
+    
   })
+ 
 }
 
 // WORLD TRADE DATA API - Stocks Page
@@ -116,12 +136,12 @@ function renderStockRates() {
       var stocksRow = $('.stock-cards-row');
 
       stocksRow.append(`
-    <div class="col s12 m6 mb-1" id="${info.data[i].name}">
+    <div class="col s12 m6 mb-1" id="${info.data[i].symbol}">
       <div class="card">
         <div class="card-content valign-wrapper">
           <div class="card-text">
             <span class="card-title">${info.data[i].name}</span>
-            <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
+            <a class="btn-floating halfway-fab waves-effect waves-light red add-stock"><i class="material-icons">add</i></a>
             <div class='row'>
               <div class='col s6'>
                 <ul><li><b>Price: </b>$${info.data[i].price}</li><li><b>Day High: </b>$${info.data[i].day_high}<li><li><b>Day Low: </b>$${info.data[i].day_low}</li></ul>
@@ -156,12 +176,12 @@ $("#stocks-submit").on("click", function () {
     var newStock = $('.stock-cards-row');
 
     newStock.prepend(`
-      <div class="col s12 m6 mb-1">
+      <div class="col s12 m6 mb-1" id="${info.data[i].name}">
         <div class="card">
           <div class="card-content valign-wrapper">
             <div class="card-text">
               <span class="card-title">${search.data[0].name}</span>
-              <a class="btn-floating halfway-fab waves-effect waves-light red add-favorite"><i class="material-icons">add</i></a>
+              <a class="btn-floating halfway-fab waves-effect waves-light red add-stock"><i class="material-icons">add</i></a>
               <div class='row'>
                 <div class='col s6'>
                   <ul><li><b>Price: </b>$${search.data[0].price}</li><li><b>Day High: </b>$${search.data[0].day_high}<li><li><b>Day Low: </b>$${search.data[0].day_low}</li></ul>
