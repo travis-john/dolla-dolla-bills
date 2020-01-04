@@ -71,7 +71,10 @@ function renderFavoritesCrypto() {
     if (user) {
       var userId = firebase.auth().currentUser.uid;
       return firebase.database().ref('/users/' + userId).once('value').then(function (snapshot) {
+
         var data = (snapshot.val());
+
+        if (data.favorites.favorites != 0) {
         console.log(data.favorites.favorites);
         var coin = data.favorites.favorites;
 
@@ -110,7 +113,11 @@ function renderFavoritesCrypto() {
 
 
         });
+      }
 
+      else {
+        return;
+      }
       }
 
         // ...
