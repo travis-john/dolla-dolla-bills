@@ -15,6 +15,21 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+  .then(function() {
+    // Existing and future Auth states are now persisted in the current
+    // session only. Closing the window would clear any existing state even
+    // if a user forgets to sign out.
+    // ...
+    // New sign-in will be persisted with session persistence.
+    return firebase.auth().signInWithEmailAndPassword(email, password);
+  })
+  .catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+  });
+
 var uiConfig = {
   callbacks: {
     signInSuccessWithAuthResult: function(authResult, redirectUrl) {
@@ -43,17 +58,6 @@ var uiConfig = {
 };
 ui.start('#firebaseui-auth-container', uiConfig);
 
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    var userId = firebase.auth().currentUser.uid;
-
-    firebase.database().ref('users/' + userId).set({
-      favorites: 0
-    });
-  } else {
-    // No user is signed in.
-  }
-});
 
 /////  NYT API CODE START /////
 var cryptoTrigger = $('.crypto-trigger'),
@@ -122,7 +126,7 @@ function renderCryptoRates() {
       var cardsRow = $('.crypto-cards-row');
 
       cardsRow.append(`
-              <div class="col s12 m6 mb-1" id="${cryptoResponse.coins[i].name}">
+              <div class="col s12 m6 mb-1" id="${cryptoResponse.coins[i].symbol}">
                 <div class="card">
                   <div class="card-content valign-wrapper">
                     <div class="card-text">
@@ -196,7 +200,7 @@ $('#crypto-submit').click(function(){
         var cardsRow = $('.crypto-cards-row');
 
         cardsRow.prepend(`
-          <div class="col s12 m6 mb-1">
+          <div class="col s12 m6 mb-1 id="${cryptoSearchResponse.symbol}">
             <div class="card">
               <div class="card-content valign-wrapper">
                 <div class="card-text">
@@ -266,16 +270,40 @@ favoriteTrigger.click(function() {
   cryptoTrigger.removeClass('active');
   stocksTrigger.removeClass('active');
   favoriteTrigger.addClass('active');
+  renderFavorites();
 });
 
-$('.add-favorite').click(function() {
 
-  //// add favorite function here /////
 
+
+$('body').on('click','.add-favorite',function(){
+  var identifier = $(this).parents().eq(3).attr("id");
+  firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/favorites/').set({
+    favorites: identifier
+  });
 });
 
-$('.remove-favorite').click(function() {
+$('body').on('click','.add-stock',function(){
+  var identifier = $(this).parents().eq(3).attr("id");
+  firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/stocks/').set({
+    stocks: identifier
+  });
+});
 
-  ///// remove favorite function here /////
+$('body').on('click','.remove-favorite',function(){
+  // let userRef = firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/favorites/');
+  //   userRef.remove()
+  firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/favorites/').set({
+    favorites: 0
+  });
+    renderFavorites();
+});
 
+$('body').on('click','.remove-stock',function(){
+  // let userRef = firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/stocks/');
+  //   userRef.remove()
+  firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/stocks/').set({
+    stocks: 0
+  });
+    renderFavorites();
 });
