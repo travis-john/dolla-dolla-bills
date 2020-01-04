@@ -250,7 +250,7 @@ $("#stocks-submit").on("click", function () {
     var newStock = $('.stock-cards-row');
 
     newStock.prepend(`
-      <div class="col s12 m6 mb-1" id="${search.data[i].name}">
+      <div class="col s12 m6 mb-1" id="${search.data[0].name}">
         <div class="card">
           <div class="card-content valign-wrapper">
             <div class="card-text">
