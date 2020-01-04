@@ -270,6 +270,7 @@ favoriteTrigger.click(function() {
   cryptoTrigger.removeClass('active');
   stocksTrigger.removeClass('active');
   favoriteTrigger.addClass('active');
+  renderFavorites();
 });
 
 
@@ -277,18 +278,32 @@ favoriteTrigger.click(function() {
 
 $('body').on('click','.add-favorite',function(){
   var identifier = $(this).parents().eq(3).attr("id");
-  var updates = {};
-  updates["/users/" + firebase.auth().currentUser.uid + '/' + "favorites/" + identifier] = identifier;
-  return firebase.database().ref().update(updates);
+  firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/favorites/').set({
+    favorites: identifier
+  });
 });
 
 $('body').on('click','.add-stock',function(){
   var identifier = $(this).parents().eq(3).attr("id");
-  var updates = {};
-  updates["/users/" + firebase.auth().currentUser.uid + '/' + "stocks/" + identifier] = identifier;
-  return firebase.database().ref().update(updates);
+  firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/stocks/').set({
+    stocks: identifier
+  });
 });
 
-// $('body').on('click','.remove-favorite',function(){
-//   var identifier = $(this).parents().eq(3).attr("id");
-// });
+$('body').on('click','.remove-favorite',function(){
+  // let userRef = firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/favorites/');
+  //   userRef.remove()
+  firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/favorites/').set({
+    favorites: 0
+  });
+    renderFavorites();
+});
+
+$('body').on('click','.remove-stock',function(){
+  // let userRef = firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/stocks/');
+  //   userRef.remove()
+  firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/stocks/').set({
+    stocks: 0
+  });
+    renderFavorites();
+});
