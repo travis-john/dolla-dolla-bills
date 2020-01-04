@@ -81,7 +81,7 @@ function renderFavoritesCrypto() {
 
 
         var cryptoSearchAPIKEY = 'cc91d6b22f005e77',
-          cryptoSearchURL = 'https://cors-anywhere.herokuapp.com/https://coinlib.io/api/v1/coin?key=' + cryptoSearchAPIKEY + '&pref=USD&symbol=' + coin;
+          cryptoSearchURL = 'https://coinlib.io/api/v1/coin?key=' + cryptoSearchAPIKEY + '&pref=USD&symbol=' + coin;
 
         $.ajax({
           url: cryptoSearchURL,
@@ -143,7 +143,7 @@ function renderFavoritesStocks() {
         console.log(stock);
         var stockAPI = 'eqO4JY274rm6yjz7UNMwePc9ifPadR2ieXI83QKwCezp6iHYT5GxIdZNFSSr';
         var searchURL =
-          "https://cors-anywhere.herokuapp.com/https://api.worldtradingdata.com/api/v1/stock?symbol=" + stock + "&api_token=" + stockAPI;
+          "https://api.worldtradingdata.com/api/v1/stock?symbol=" + stock + "&api_token=" + stockAPI;
 
         $.ajax({
           url: searchURL,

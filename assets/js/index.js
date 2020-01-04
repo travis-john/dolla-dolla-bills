@@ -200,7 +200,7 @@ $('#crypto-submit').click(function(){
         var cardsRow = $('.crypto-cards-row');
 
         cardsRow.prepend(`
-          <div class="col s12 m6 mb-1">
+          <div class="col s12 m6 mb-1 id="${cryptoSearchResponse.symbol}">
             <div class="card">
               <div class="card-content valign-wrapper">
                 <div class="card-text">
