@@ -60,7 +60,7 @@ renderFavorites()
 
 // WORLD TRADE DATA API - Favorites Page
 function renderFavorites() {
-  var stockAPI = '73cdYy54IDQYfiqTXJ3tjQobUdFErpCqhd74BdZERF6rLfclhO5ubZeoVv9O';
+  var stockAPI = 'hsnKYpZluHEuyITP94BBqxuXhVZqSvEKLKEn2poKlAjofGqzilkftnz8s2M8';
   var stockInfo =
       "https://api.worldtradingdata.com/api/v1/stock?symbol=GOOGL,APPL,AMZN,BABA,VZ&api_token=" + stockAPI;
 
@@ -102,7 +102,7 @@ function renderFavorites() {
 function renderStockRates() {
   $('.stock-cards-row').empty();
 
-  var stockAPI = '73cdYy54IDQYfiqTXJ3tjQobUdFErpCqhd74BdZERF6rLfclhO5ubZeoVv9O';
+  var stockAPI = 'hsnKYpZluHEuyITP94BBqxuXhVZqSvEKLKEn2poKlAjofGqzilkftnz8s2M8';
   var stockInfo =
       "https://api.worldtradingdata.com/api/v1/stock?symbol=MSFT,SNAP,TWTR,VOD.L&api_token=" + stockAPI;
 
@@ -143,7 +143,7 @@ function renderStockRates() {
 // WORLD TRADE DATA API: Searching and adding stocks
 $("#stocks-submit").on("click", function () {
   var searchTicker = $("#stocks-search").val().trim();
-  var stockAPI = '73cdYy54IDQYfiqTXJ3tjQobUdFErpCqhd74BdZERF6rLfclhO5ubZeoVv9O';
+  var stockAPI = 'hsnKYpZluHEuyITP94BBqxuXhVZqSvEKLKEn2poKlAjofGqzilkftnz8s2M8';
   var searchURL =
     "https://api.worldtradingdata.com/api/v1/stock?symbol=" + searchTicker + "&api_token=" + stockAPI;
 
