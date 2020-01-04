@@ -12,6 +12,11 @@ a {
   cursor: pointer;
 }
 
+#mycanvas {
+  position: relative;
+  z-index: 1;
+}
+
 .input-field label:not(.label-icon).active {
   color: black;
   font-size: 1.125rem;

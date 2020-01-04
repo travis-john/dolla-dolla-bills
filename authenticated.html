@@ -33,11 +33,13 @@
   <!-- Firebase CSS -->
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 
+  <!-- Chart.js Script-->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
   <!-- Importing Roboto and Roboto Slab from Google Fonts -->
   <link href='https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap' rel='stylesheet'>
   <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
-
 
 
   <!-- Custom CSS -->
@@ -135,8 +137,7 @@
         </div>
         <div class="row stock-cards-row">
         </div>
-        <div class="row" id="stock-chart">
-        </div>
+        <canvas id="mycanvas"></canvas>
       </div>
       <div class="row stocks-news-row d-none">
         <div class="col s12 m12">
@@ -165,6 +166,7 @@
   <!-- Materialize JS -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>
 
+
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
   <!-- TODO: Add SDKs for Firebase products that you want to use
@@ -180,9 +182,7 @@
   <script src="assets/js/stocks.js"></script>
 
 
-
 </body>
-<!-- Chart.js Script-->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
 
 </html>

@@ -14,11 +14,11 @@
 //   });
 // }
 
-renderFavorites()
+renderFavorites();
 
 // WORLD TRADE DATA API - Favorites Page
 function renderFavorites() {
-  var stockAPI = '73cdYy54IDQYfiqTXJ3tjQobUdFErpCqhd74BdZERF6rLfclhO5ubZeoVv9O';
+  var stockAPI = 'hsnKYpZluHEuyITP94BBqxuXhVZqSvEKLKEn2poKlAjofGqzilkftnz8s2M8';
   var stockInfo =
     "https://api.worldtradingdata.com/api/v1/stock?symbol=GOOGL,APPL,AMZN,BABA,VZ&api_token=" + stockAPI;
 
@@ -46,7 +46,7 @@ function renderFavorites() {
                 <ul><li><b>Day Change: </b>$ ${info.data[i].day_change}</li><li><b>Change Percent: </b>${info.data[i].change_pct}%<li></ul>
               </div>
             </div>
-            <div id="stock-chart"></div>
+            <canvas id="mycanvas"></canvas>
           </div>
         </div>
         <div class="card-action"><a href="#">View report</a></div>
@@ -60,7 +60,7 @@ function renderFavorites() {
 function renderStockRates() {
   $('.stock-cards-row').empty();
 
-  var stockAPI = '73cdYy54IDQYfiqTXJ3tjQobUdFErpCqhd74BdZERF6rLfclhO5ubZeoVv9O';
+  var stockAPI = 'hsnKYpZluHEuyITP94BBqxuXhVZqSvEKLKEn2poKlAjofGqzilkftnz8s2M8';
   var stockInfo =
     "https://api.worldtradingdata.com/api/v1/stock?symbol=MSFT,SNAP,TWTR,VOD.L&api_token=" + stockAPI;
 
@@ -88,7 +88,7 @@ function renderStockRates() {
                 <ul><li><b>Day Change: </b>$ ${info.data[i].day_change}</li><li><b>Change Percent: </b>${info.data[i].change_pct}%<li></ul>
               </div>
             </div>
-            <div id="stock-chart"></div>
+              <canvas id="mycanvas"></canvas>
           </div>
         </div>
         <div class="card-action"><a href="#">View report</a></div>
@@ -101,7 +101,7 @@ function renderStockRates() {
 // WORLD TRADE DATA API: Searching and adding stocks
 $("#stocks-submit").on("click", function () {
   var searchTicker = $("#stocks-search").val().trim();
-  var stockAPI = '73cdYy54IDQYfiqTXJ3tjQobUdFErpCqhd74BdZERF6rLfclhO5ubZeoVv9O';
+  var stockAPI = 'hsnKYpZluHEuyITP94BBqxuXhVZqSvEKLKEn2poKlAjofGqzilkftnz8s2M8';
   var searchURL =
     "https://api.worldtradingdata.com/api/v1/stock?symbol=" + searchTicker + "&api_token=" + stockAPI;
 
@@ -134,15 +134,17 @@ $("#stocks-submit").on("click", function () {
           <div class="card-action"><a href="#">View report</a></div>
         </div>
       </div>`);
+
+    renderCharts();
+
   });
-  renderCharts();
 })
 
 // ALPHA VANTAGE + CHART.JS - Rendering and Creating Stock Charts - TO BE UPDATED
 // create initial empty chart
-var ctx_live = document.getElementById("mycanvas");
-var myChart = new Chart(ctx_live, {
-  type: 'area',
+var ctx = document.getElementById("mycanvas");
+var myChart = new Chart(ctx, {
+  type: 'bar',
   data: {
     labels: [],
     datasets: [{
@@ -171,30 +173,28 @@ var myChart = new Chart(ctx_live, {
   }
 });
 
-function renderCharts() {
+function renderCharts(myChart) {
   // Search Parameters to drive example data
   var searchTicker = $("#stocks-search").val().trim();
-  var chartAPI = "73cdYy54IDQYfiqTXJ3tjQobUdFErpCqhd74BdZERF6rLfclhO5ubZeoVv9O";
+  var chartAPI = "hsnKYpZluHEuyITP94BBqxuXhVZqSvEKLKEn2poKlAjofGqzilkftnz8s2M8";
+  var queryURL = "https://intraday.worldtradingdata.com/api/v1/intraday?symbol=" + searchTicker + "&range=1&interval=5&api_token=" + chartAPI;
 
-  // logic to get new data
-  var getData = function () {
-    $.ajax({
-      url: "https://intraday.worldtradingdata.com/api/v1/intraday?symbol=" + searchTicker + "&range=1&interval=5&api_token=" + chartAPI,
-      success: function (data) {
-        console.log(data);
-        // process your data to pull out what you plan to use to update the chart
-        // e.g. new label and a new data point
-        // for (let i = 0; i < data.intraday.length; i++) {
-        //   myChart.data.labels.push("Post " + postId++);
-        //   myChart.data.datasets[0].data.push(getRandomIntInclusive(1, 25));
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function (fact) {
+    console.log(fact);
+    // process your data to pull out what you plan to use to update the chart
+    // e.g. new label and a new data point
+    for (var i = 0; i < fact.intraday.length; i++) {
 
-        // add new label and data point to chart's underlying data structures
-        // re-render the chart
-        myChart.update();
-      }
-    });
-  };
+      myChart.data.datasets[0].data.push(fact.intraday[i]);
+
+      // add new label and data point to chart's underlying data structures
+      // re-render the chart
+      myChart.update();
+    };
+  });
   // Get new data every 5 minutes
-  setInterval(getData, 300000);
+  setInterval(renderCharts, 300000);
 }
-
