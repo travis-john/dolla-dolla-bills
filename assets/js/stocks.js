@@ -81,7 +81,7 @@ function renderFavoritesCrypto() {
 
 
         var cryptoSearchAPIKEY = 'cc91d6b22f005e77',
-          cryptoSearchURL = 'https://coinlib.io/api/v1/coin?key=' + cryptoSearchAPIKEY + '&pref=USD&symbol=' + coin;
+          cryptoSearchURL = 'https://cors-anywhere.herokuapp.com/https://coinlib.io/api/v1/coin?key=' + cryptoSearchAPIKEY + '&pref=USD&symbol=' + coin;
 
         $.ajax({
           url: cryptoSearchURL,
@@ -138,11 +138,12 @@ function renderFavoritesStocks() {
       var userId = firebase.auth().currentUser.uid;
       return firebase.database().ref('/users/' + userId).once('value').then(function (snapshot) {
         var data = (snapshot.val());
+        if (data.stocks.stocks != 0) {
         var stock = data.stocks.stocks;
         console.log(stock);
-        var stockAPI = '73cdYy54IDQYfiqTXJ3tjQobUdFErpCqhd74BdZERF6rLfclhO5ubZeoVv9O';
+        var stockAPI = 'eqO4JY274rm6yjz7UNMwePc9ifPadR2ieXI83QKwCezp6iHYT5GxIdZNFSSr';
         var searchURL =
-          "https://api.worldtradingdata.com/api/v1/stock?symbol=" + stock + "&api_token=" + stockAPI;
+          "https://cors-anywhere.herokuapp.com/https://api.worldtradingdata.com/api/v1/stock?symbol=" + stock + "&api_token=" + stockAPI;
 
         $.ajax({
           url: searchURL,
@@ -175,6 +176,10 @@ function renderFavoritesStocks() {
     </div>`);
         });
       }
+      else {
+        return;
+      }
+    }
 
         // ...
       )
@@ -191,7 +196,7 @@ function renderFavoritesStocks() {
 function renderStockRates() {
   $('.stock-cards-row').empty();
 
-  var stockAPI = '73cdYy54IDQYfiqTXJ3tjQobUdFErpCqhd74BdZERF6rLfclhO5ubZeoVv9O';
+  var stockAPI = 'eqO4JY274rm6yjz7UNMwePc9ifPadR2ieXI83QKwCezp6iHYT5GxIdZNFSSr';
   var stockInfo =
     "https://api.worldtradingdata.com/api/v1/stock?symbol=MSFT,SNAP,TWTR,VOD.L&api_token=" + stockAPI;
 
@@ -232,7 +237,7 @@ function renderStockRates() {
 // WORLD TRADE DATA API: Searching and adding stocks
 $("#stocks-submit").on("click", function () {
   var searchTicker = $("#stocks-search").val().trim();
-  var stockAPI = '73cdYy54IDQYfiqTXJ3tjQobUdFErpCqhd74BdZERF6rLfclhO5ubZeoVv9O';
+  var stockAPI = 'eqO4JY274rm6yjz7UNMwePc9ifPadR2ieXI83QKwCezp6iHYT5GxIdZNFSSr';
   var searchURL =
     "https://api.worldtradingdata.com/api/v1/stock?symbol=" + searchTicker + "&api_token=" + stockAPI;
 
